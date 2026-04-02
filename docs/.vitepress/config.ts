@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'LangChain 中文文档',
   description: 'Deep Agents / LangChain / LangGraph 中文学习指南',
+  base: '/langchain-docs-zh/',
   lang: 'zh-CN',
   lastUpdated: true,
 
@@ -18,7 +19,7 @@ export default defineConfig({
       { text: 'LangGraph', link: '/langgraph/' },
       { text: '集成', link: '/integrations/' },
       { text: '实战', link: '/tutorials/' },
-      { text: 'GitHub', link: 'https://github.com/xxx/langchain-docs-zh' }
+      { text: 'GitHub', link: 'https://github.com/zzy-cl/langchain-docs-zh' }
     ],
 
     sidebar: {
