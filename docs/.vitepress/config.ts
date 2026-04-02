@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'LangChain 中文文档',
   description: 'Deep Agents / LangChain / LangGraph 中文学习指南',
   base: '/langchain-docs-zh/',
@@ -269,4 +270,4 @@ export default defineConfig({
     ['meta', { name: 'keywords', content: 'LangChain, LangGraph, Deep Agents, 中文文档, TypeScript, AI Agent, LLM' }],
     ['meta', { name: 'author', content: 'LangChain 中文文档团队' }]
   ]
-})
+}))
