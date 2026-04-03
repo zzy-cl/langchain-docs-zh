@@ -87,10 +87,21 @@ const result = await graph.invoke({
 
 ## 工作流程
 
-```
-START → 搜索 → 评估质量 → 好 → 生成答案 → END
-                      ↓ 坏
-                  换搜索词 → 搜索（循环，最多 3 次）
+```mermaid
+graph TD
+    START --> SEARCH["🔍 搜索"]
+    SEARCH --> EVAL["📊 评估质量"]
+    EVAL -->|"质量好 ✅"| GEN["📝 生成答案"]
+    EVAL -->|"质量差 ❌"| CHECK["🔄 尝试次数"]
+    CHECK -->|"< 3 次"| REPHRASE["💬 换搜索词"]
+    CHECK -->|"≥ 3 次"| GEN
+    REPHRASE --> SEARCH
+    GEN --> END
+
+    style SEARCH fill:#3b82f6,color:#fff
+    style EVAL fill:#f59e0b,color:#000
+    style GEN fill:#22c55e,color:#fff
+    style REPHRASE fill:#8b5cf6,color:#fff
 ```
 
 ## 下一步

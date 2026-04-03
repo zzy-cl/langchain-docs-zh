@@ -7,6 +7,20 @@ description: 学习用 LangGraph 的方式思考问题
 
 ## 核心思维转变
 
+```mermaid
+graph TB
+    subgraph "传统代码"
+        LINEAR["线性执行<br/>if/else 硬编码"]
+    end
+    subgraph "LangGraph"
+        DECL["声明式图<br/>节点 + 边 + 状态"]
+    end
+    LINEAR -->|"升级"| DECL
+
+    style LINEAR fill:#ef4444,color:#fff
+    style DECL fill:#22c55e,color:#fff
+```
+
 > **普通 Agent**：你说一句话，它回一句话
 > **LangGraph Agent**：你画一张流程图，它按图执行
 
@@ -14,10 +28,19 @@ description: 学习用 LangGraph 的方式思考问题
 
 ### 1. 先画图，再写代码
 
-```
-START → 搜索 → 判断结果
-                    ├─ 有结果 → 总结 → END
-                    └─ 没结果 → 换关键词 → 搜索（循环）
+```mermaid
+graph TD
+    START --> SEARCH["🔍 搜索"]
+    SEARCH --> JUDGE{"有结果？"}
+    JUDGE -->|"有"| SUM["📋 总结"]
+    JUDGE -->|"没有"| REPHRASE["💬 换关键词"]
+    REPHRASE --> SEARCH
+    SUM --> END
+
+    style SEARCH fill:#3b82f6,color:#fff
+    style JUDGE fill:#f59e0b,color:#000
+    style SUM fill:#22c55e,color:#fff
+    style REPHRASE fill:#8b5cf6,color:#fff
 ```
 
 ### 2. 每个圆圈是一个"节点"

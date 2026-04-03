@@ -9,9 +9,22 @@ description: 对 Agent 的输入和输出做安全检查
 
 Agent 的"安检门"——在用户输入进来、Agent 输出出去之前，先过一遍安全检查。
 
-## 类比
-
 > 就像机场安检——人进去之前先过 X 光机，有危险品直接拦住。
+
+```mermaid
+graph LR
+    USER["用户输入"] --> IN_CHECK["输入检查"]
+    IN_CHECK -->|"通过"| AGENT["Agent 处理"]
+    IN_CHECK -->|"拦截"| BLOCK1["❌ 返回提示"]
+    AGENT --> OUT_CHECK["输出检查"]
+    OUT_CHECK -->|"通过"| REPLY["返回给用户"]
+    OUT_CHECK -->|"拦截"| BLOCK2["❌ 替换输出"]
+
+    style IN_CHECK fill:#f59e0b,color:#000
+    style OUT_CHECK fill:#3b82f6,color:#fff
+    style BLOCK1 fill:#ef4444,color:#fff
+    style BLOCK2 fill:#ef4444,color:#fff
+```
 
 ## 检查类型
 
@@ -39,7 +52,7 @@ const agent = createAgent({
       },
       message: "检测到敏感内容，请勿输入。",
     },
-    // 输出检查：防止泄露
+    // 输出检查：防止泄露 API Key
     {
       type: "output",
       check: (output) => !output.includes("sk-"),
@@ -48,6 +61,15 @@ const agent = createAgent({
   ],
 });
 ```
+
+## 最佳实践
+
+| 做法 | 说明 |
+|------|------|
+| ✅ 输入输出都检查 | 防止注入和泄露 |
+| ✅ 检查要快速 | 避免影响响应速度 |
+| ✅ 拦截要友好 | 返回人类可读的提示 |
+| ❌ 只靠关键词 | 要结合正则和 LLM 检查 |
 
 ## 下一步
 

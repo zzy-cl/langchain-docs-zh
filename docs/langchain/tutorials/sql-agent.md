@@ -9,6 +9,19 @@ description: 用自然语言查询数据库的 Agent
 
 用自然语言查数据库——"上个月销售额最高的产品是什么？" Agent 自动写 SQL、执行、返回结果。
 
+```mermaid
+graph LR
+    Q["用户：销量最高的产品？"] --> AGENT["Agent 分析"]
+    AGENT --> SQL["生成 SQL"]
+    SQL --> DB["执行查询"]
+    DB --> RESULT["返回结果"]
+    RESULT --> REPLY["用自然语言回答"]
+
+    style AGENT fill:#8b5cf6,color:#fff
+    style SQL fill:#3b82f6,color:#fff
+    style DB fill:#22c55e,color:#fff
+```
+
 ## 实现
 
 ```typescript

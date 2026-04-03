@@ -5,6 +5,20 @@ description: 几分钟内创建你的第一个 LangGraph 工作流
 
 # LangGraph 快速开始
 
+## 整体流程
+
+```mermaid
+graph LR
+    A["📦 安装包"] --> B["📝 定义状态"]
+    B --> C["⚙️ 添加节点"]
+    C --> D["🔗 定义边"]
+    D --> E["🔨 编译"]
+    E --> F["🚀 执行"]
+
+    style A fill:#22c55e,color:#fff
+    style F fill:#3b82f6,color:#fff
+```
+
 ## 安装
 
 ```bash
@@ -45,6 +59,17 @@ console.log(result.messages[result.messages.length - 1].content);
 
 ## 带工具调用的 Agent
 
+```mermaid
+graph LR
+    START --> AGENT["🤖 Agent<br/>思考"]
+    AGENT -->|"需要工具"| TOOLS["🔧 Tools<br/>执行"]
+    AGENT -->|"直接回复"| END
+    TOOLS -->|"拿到结果"| AGENT
+
+    style AGENT fill:#3b82f6,color:#fff
+    style TOOLS fill:#22c55e,color:#fff
+```
+
 ```typescript
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
@@ -75,6 +100,14 @@ const graph = new StateGraph(MessagesAnnotation)
   .addEdge("tools", "agent");
 
 const app = graph.compile();
+
+// 执行
+const result = await app.invoke({
+  messages: [{ role: "user", content: "北京天气怎么样？" }],
+});
+
+console.log(result.messages.at(-1).content);
+// 输出：今天北京晴天，25°C
 ```
 
 ## 下一步

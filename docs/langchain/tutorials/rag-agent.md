@@ -66,8 +66,17 @@ console.log(result);
 
 ## 工作流程
 
-```
-用户提问 → 向量化问题 → 在向量库中搜索最相关的 3 段 → 喂给模型 → 模型基于资料回答
+```mermaid
+graph LR
+    Q["用户提问"] --> EMB["问题向量化"]
+    EMB --> SEARCH["向量库搜索"]
+    SEARCH --> TOP3["Top-3 相关文档"]
+    TOP3 --> LLM["模型生成回答"]
+    LLM --> A["最终答案"]
+
+    style EMB fill:#3b82f6,color:#fff
+    style SEARCH fill:#22c55e,color:#fff
+    style LLM fill:#8b5cf6,color:#fff
 ```
 
 ## 扩展

@@ -7,6 +7,23 @@ description: Graph API 和 Functional API 的对比与选择指南
 
 ## 对比
 
+```mermaid
+graph LR
+    subgraph "Graph API"
+        G["📊 声明式<br/>画图定义"]
+    end
+    subgraph "Functional API"
+        F["📝 命令式<br/>写函数定义"]
+    end
+    G --> RUNTIME{"同一运行时"}
+    F --> RUNTIME
+    RUNTIME --> FEAT["持久化 · 流式 · 人工介入"]
+
+    style G fill:#3b82f6,color:#fff
+    style F fill:#22c55e,color:#fff
+    style RUNTIME fill:#f59e0b,color:#000
+```
+
 | 维度 | Graph API | Functional API |
 |------|-----------|----------------|
 | **风格** | 声明式（画图） | 命令式（写函数） |

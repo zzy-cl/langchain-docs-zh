@@ -13,6 +13,28 @@ LangGraph 是一个**底层 Agent 编排框架和运行时**。Klarna、Uber、J
 
 ## 核心能力
 
+```mermaid
+graph TB
+    subgraph "LangGraph 核心能力"
+        SG["📊 状态图<br/>节点 + 边"]
+        PERSIST["💾 持久化<br/>断点恢复"]
+        HITL["🙋 人工介入<br/>暂停确认"]
+        TT["⏪ 时间旅行<br/>回溯历史"]
+        STREAM["📡 流式输出<br/>实时返回"]
+    end
+
+    SG --> PERSIST
+    SG --> HITL
+    SG --> STREAM
+    PERSIST --> TT
+
+    style SG fill:#3b82f6,color:#fff
+    style PERSIST fill:#22c55e,color:#fff
+    style HITL fill:#f59e0b,color:#000
+    style TT fill:#8b5cf6,color:#fff
+    style STREAM fill:#ef4444,color:#fff
+```
+
 | 能力 | 说明 |
 |------|------|
 | **状态图** | 用节点和边定义工作流 |
@@ -67,8 +89,15 @@ const result = await app.invoke({ messages: [] });
 
 ## 与 LangChain 的关系
 
-```
-Deep Agents = LangChain + LangGraph + 内置能力
+```mermaid
+graph LR
+    LC["🔗 LangChain<br/>基础库"] --> LG["📊 LangGraph<br/>编排框架"]
+    LG --> DA["🤖 Deep Agents<br/>内置能力"]
+    LC --> DA
+
+    style LC fill:#3b82f6,color:#fff
+    style LG fill:#22c55e,color:#fff
+    style DA fill:#8b5cf6,color:#fff
 ```
 
 - **LangChain** 的 Agent 底层自动使用 LangGraph

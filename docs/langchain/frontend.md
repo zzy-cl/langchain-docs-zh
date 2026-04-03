@@ -9,11 +9,10 @@ description: 用 React 构建 Agent 的前端界面
 
 | 功能 | 说明 |
 |------|------|
-| **流式 UI** | Agent 回复逐字显示 |
+| **流式 UI** | Agent 回复逐字显示，像 ChatGPT 那样 |
 | **分支聊天** | 编辑消息、重新生成、回退到历史 |
 | **工具调用卡片** | 可视化展示工具执行过程 |
 | **推理 Token** | 展示模型思考过程 |
-| **时间旅行** | 跳转到任意历史节点 |
 
 ## 流式 UI 示例
 
@@ -53,15 +52,30 @@ function ToolCallCard({ toolCall }) {
 }
 ```
 
-## UI 框架集成
+## UI 框架推荐
 
 | 框架 | 说明 |
 |------|------|
 | **AI Elements** | shadcn/ui 风格的 AI 组件 |
 | **assistant-ui** | 无头 React AI 聊天框架 |
-| **OpenUI** | 生成式 UI 组件库 |
+| **Vercel AI SDK** | `useChat` hook + 流式支持 |
+
+## 前后端通信流程
+
+```mermaid
+graph LR
+    UI["React 前端"] -->|"/api/agent"| BACKEND["Express 后端"]
+    BACKEND -->|"SSE 流"| UI
+    BACKEND --> AGENT["Agent 执行"]
+    AGENT --> LLM["LLM 模型"]
+
+    style UI fill:#3b82f6,color:#fff
+    style BACKEND fill:#22c55e,color:#fff
+    style AGENT fill:#8b5cf6,color:#fff
+```
 
 ## 下一步
 
 - [Deep Agents 前端集成](/deepagents/frontend)
 - [流式输出](/langchain/agents/streaming)
+- [部署](/langchain/deployment)

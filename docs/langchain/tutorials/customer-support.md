@@ -11,8 +11,20 @@ description: 用 Multi-Agent 构建智能客服系统
 
 ## 架构
 
-```
-用户提问 → 路由 Agent（判断类型）→ 销售 Agent / 技术 Agent / 退款 Agent
+```mermaid
+graph TD
+    USER["用户提问"] --> ROUTER["路由 Agent<br/>判断问题类型"]
+    ROUTER -->|"产品咨询"| SALES["销售 Agent"]
+    ROUTER -->|"技术问题"| TECH["技术支持 Agent"]
+    ROUTER -->|"退款申请"| REFUND["退款 Agent"]
+    SALES --> REPLY["回复用户"]
+    TECH --> REPLY
+    REFUND --> REPLY
+
+    style ROUTER fill:#f59e0b,color:#000
+    style SALES fill:#3b82f6,color:#fff
+    style TECH fill:#22c55e,color:#fff
+    style REFUND fill:#8b5cf6,color:#fff
 ```
 
 ## 实现

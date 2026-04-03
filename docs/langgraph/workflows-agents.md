@@ -48,6 +48,22 @@ const agent = new StateGraph(/* ... */)
 
 实际项目中经常混合使用——某些步骤固定，某些步骤由 Agent 决定。
 
+```mermaid
+graph TD
+    START --> CLASSIFY["📊 分类（固定）"]
+    CLASSIFY --> AGENT["🤖 Agent（动态）"]
+    AGENT --> REVIEW["👀 人工审查（固定）"]
+    REVIEW --> SEND["📤 发送（固定）"]
+    SEND --> END
+
+    style CLASSIFY fill:#22c55e,color:#fff
+    style AGENT fill:#3b82f6,color:#fff
+    style REVIEW fill:#f59e0b,color:#000
+    style SEND fill:#8b5cf6,color:#fff
+```
+
+上图就是一个混合例子：分类和发送是固定流程，Agent 自主决定怎么处理，人工审查是固定环节。
+
 ## 下一步
 
 - [两种 API 怎么选](/langgraph/api-choice)
